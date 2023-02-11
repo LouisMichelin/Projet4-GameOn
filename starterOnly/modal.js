@@ -21,3 +21,20 @@ function launchModal() {
 }
 
 
+//
+// #1 Fermer la modale
+//
+const closeBtn = document.querySelectorAll(".close");
+
+// close modal event
+closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
+
+// close modal form
+function closeModal() {
+  modalbg.style.display = "none";
+}
+
+
+//
+// #2 Implémenter les entrées du formulaire
+//
