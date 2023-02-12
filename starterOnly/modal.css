@@ -183,6 +183,13 @@ main {
   padding-top: 10px;
 }
 
+/* Classe pour le message post-vérification du RegExp */
+.regexp-check {
+  font-size: 15px;
+  font-weight: normal;
+  font-style: italic;
+}
+
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
