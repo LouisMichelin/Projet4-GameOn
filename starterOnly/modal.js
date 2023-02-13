@@ -104,7 +104,7 @@ function checkEmail(input) {
     input.nextElementSibling.style.color = "green";
     return true;
   } else {
-    input.nextElementSibling.innerHTML = "Champ vide ou incorrect.";
+    input.nextElementSibling.innerHTML = "Champ vide ou email saisie incorrecte.";
     input.nextElementSibling.style.color = "red";
     return false;
   };
@@ -113,9 +113,10 @@ function checkEmail(input) {
 //
 // Vérification conformité Date de naissance
 //
-            // ? REGEX pour date de naissance: /^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/
-            // REGEX SARRA , SI BESOIN :  /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
-            // Utiliser la NEW DATE !!!!!!!!!!!
+
+// ? REGEX pour date de naissance: /^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/
+// REGEX SARRA , SI BESOIN :  /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+// Utiliser la NEW DATE !!!!!!!!!!!
 
 formDataBirthdate.addEventListener("change", function() {
   checkBirthdate(this);
@@ -137,24 +138,11 @@ function checkBirthdate(input) {
     input.nextElementSibling.style.color = "green";
     return true;
   } else {
-    input.nextElementSibling.innerHTML = "Champ vide ou incorrect.";
+    input.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
     input.nextElementSibling.style.color = "red";
     return false;
   };
 }
-
-
-
-
-  
-
-
-
-
-
-
-
-
 
 
 
@@ -164,16 +152,35 @@ function checkBirthdate(input) {
 //
 // Vérification conformité Nombre de tournois GameOn
 //
-  // if else selon valeur saisie
+
+// if else selon valeur saisie
   let tournamentsRegExp = new RegExp(
     '[0-9]{1,3}', 'g'
   );
 
 
+//
+// Vérification au moins 1 tournoi sélectionné
+//
+
+
+//
+// Vérification conditions d'utilisateurs = COCHEE (car pas cochée par défaut)
+//
+
 //----------------------------------------------------------------------------------------------
+
+//
+// Bouton SUBMIT - Si toutes les conditions sont réunies
+//
+document.getElementById("inscription").addEventListener("submit", function(e) {
+  // permet d'éviter le rechargement de la page juste après l'envoie du formulaire
+  e.preventDefault();
+  alert('Merci de votre inscription, et à bientôt !');
+});
+
 // let validName= checkFirstname();
 // une autre pour firstNAme
 // 3ieme pour l'email
-
-// Et à la toute fin : 
-  // if(validName && validEmail && ) => passer à la div merci pour votre inscription 
+// Et à la toute fin :
+// if(validName && validEmail && ) => passer à la div merci pour votre inscription 
