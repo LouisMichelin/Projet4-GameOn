@@ -55,9 +55,8 @@ const formDataNom = document.querySelector("#last");
 const formDataEmail = document.querySelector("#email");
 const formDataBirthdate = document.querySelector("#birthdate");
 const formDataTournois = document.querySelector("#quantity");
-// const formDataLocation =document.querySelector();
+// const formDataLocation = document.querySelector();
 // const formDataCheckbox = document.querySelector();
-
 
 //
 // Vérification conformité Prénom + conformité Nom
@@ -87,26 +86,81 @@ function checkName(input) {
   };
 }
 
-
 //
 // Vérification conformité Adresse e-mail
 //
-  // ? REGEX "RFC 5322 official standard": ([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])
-  // REGEXP DE SARRA /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  let emailRegExp = new RegExp(
-    '^[A-Za-z0-9.-_]+[@]{1}[A-Za-z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g'
-  );
+formDataEmail.addEventListener("change", function() {
+  checkEmail(this);
+});
+
+function checkEmail(input) {
+  // Définition du RegExp
+  let emailRegExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'g');
+  // Test du RegExp
+  let testEmail = emailRegExp.test(input.value);
+  // Résultat conditionnel
+  if (testEmail) {
+    input.nextElementSibling.innerHTML = "Champ valide.";
+    input.nextElementSibling.style.color = "green";
+    return true;
+  } else {
+    input.nextElementSibling.innerHTML = "Champ vide ou incorrect.";
+    input.nextElementSibling.style.color = "red";
+    return false;
+  };
+}
 
 //
 // Vérification conformité Date de naissance
 //
-  // ? REGEX pour date de naissance: /^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/
-  // REGEX SARRA , SI BESOIN :  /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
-  // Utiliser la NEW DATE !!!!!!!!!!!
-  let birthdateRegExp = new RegExp(
-    '^[0-9]{1,2}/[0-9]{1,2}/[1-2]{1}[0-9]{3}$', 'g'
-  );
+            // ? REGEX pour date de naissance: /^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/
+            // REGEX SARRA , SI BESOIN :  /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+            // Utiliser la NEW DATE !!!!!!!!!!!
+
+formDataBirthdate.addEventListener("change", function() {
+  checkBirthdate(this);
+});    
+
+let date = new Date();
+console.log("date d'aujd=" + date);
+
+function checkBirthdate(input) {
+  // Définition du RegExp
+  let birthdateRegExp = new RegExp('^[0-9]{1,2}/[0-9]{1,2}/[1-2]{1}[0-9]{3}$', 'g');
+  // Test du RegExp
+  let testBirthdate = birthdateRegExp.test(input.value);
   
+
+  // Résultat conditionnel
+  if (testBirthdate) {
+    input.nextElementSibling.innerHTML = "Champ valide.";
+    input.nextElementSibling.style.color = "green";
+    return true;
+  } else {
+    input.nextElementSibling.innerHTML = "Champ vide ou incorrect.";
+    input.nextElementSibling.style.color = "red";
+    return false;
+  };
+}
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 // Vérification conformité Nombre de tournois GameOn
 //
