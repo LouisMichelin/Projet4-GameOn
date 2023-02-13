@@ -23,6 +23,7 @@ function launchModal() {
 //
 // #1 Fermer la modale
 //
+
 // DOM Element pour fermeture de la modale
 const closeBtn = document.querySelectorAll(".close");
 
@@ -56,49 +57,35 @@ const formDataBirthdate = document.querySelector("#birthdate");
 const formDataTournois = document.querySelector("#quantity");
 // const formDataLocation =document.querySelector();
 // const formDataCheckbox = document.querySelector();
-const regexpMessage = document.querySelector(".regexp-check");
+
 
 //
-// Vérification conformité Prénom
+// Vérification conformité Prénom + conformité Nom
 //
 formDataPrenom.addEventListener("change", function() {
   checkName(this);
 });
 
-function checkName(input) {
-
-  // Définition du RegExp
-  let nameRegExp = new RegExp('^[A-Za-z-]{2,30}$', 'g');
-
-  // Test du RegExp
-  let testName = nameRegExp.test(input.value);
-  console.log(testName);
-
-  // Résultat conditionnel
-  if (testName) {
-    regexpMessage.innerHTML = "Champ valide!";
-    regexpMessage.style.color = "green";
-    return true;
-  } else {
-    regexpMessage.innerHTML = "Champ incorrect.";
-    regexpMessage.style.color = "red";
-    return false;
-  };
-}
-
-//
-// Vérification conformité Nom
-//
 formDataNom.addEventListener("change", function() {
   checkName(this);
 });
 
-
-
-
-
-
-
+function checkName(input) {
+  // Définition du RegExp
+  let nameRegExp = new RegExp('^[A-Za-z-]{2,30}$', 'g');
+  // Test du RegExp
+  let testName = nameRegExp.test(input.value);
+  // Résultat conditionnel
+  if (testName) {
+    input.nextElementSibling.innerHTML = "Champ valide.";
+    input.nextElementSibling.style.color = "green";
+    return true;
+  } else {
+    input.nextElementSibling.innerHTML = "Champ vide ou incorrect.";
+    input.nextElementSibling.style.color = "red";
+    return false;
+  };
+}
 
 
 //
