@@ -113,41 +113,43 @@ function checkEmail(input) {
 //
 // Vérification conformité Date de naissance
 //
-
-// ? REGEX pour date de naissance: /^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/
-// REGEX SARRA , SI BESOIN :  /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
-// Utiliser la NEW DATE !!!!!!!!!!!
-
 formDataBirthdate.addEventListener("change", function() {
   checkBirthdate(this);
 });    
 
-let date = new Date();
-console.log("date d'aujd=" + date);
-
 function checkBirthdate(input) {
   // Définition du RegExp
-  let birthdateRegExp = new RegExp('^[0-9]{1,2}/[0-9]{1,2}/[1-2]{1}[0-9]{3}$', 'g');
+  let birthdateRegExp = new RegExp(
+    '^(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'// type=date est en yyyy-mm-jj !
+  );
+
   // Test du RegExp
   let testBirthdate = birthdateRegExp.test(input.value);
-  
 
+  // Variables pour vérifier : (Birthdate <<< Date d'aujourd'hui)
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1; // months de 0 à 11 en JavaScript -> donc +1
+  let yyyy = today.getFullYear();
+  if (dd < 10) {dd = '0' + dd;}
+  if (mm < 10) {mm = '0' + mm;}
+  let dateAujd = yyyy + '-' + mm + '-' + dd ;
+  
   // Résultat conditionnel
-  if (testBirthdate) {
+  if (testBirthdate && dateAujd.valueOf() > input.value) {
     input.nextElementSibling.innerHTML = "Champ valide.";
     input.nextElementSibling.style.color = "green";
     return true;
-  } else {
-    input.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
+  } else if (testBirthdate && dateAujd.valueOf() < input.value) {
+    input.nextElementSibling.innerHTML = "Vous ne pouvez pas être né(e) demain!";
     input.nextElementSibling.style.color = "red";
     return false;
-  };
+  } else if (testBirthdate === false) {
+    input.nextElementSibling.innerHTML = "Veuillez saisir votre date de naissance.";
+    input.nextElementSibling.style.color = "red";
+    return false;
+  }
 }
-
-
-
-
-
 
 //
 // Vérification conformité Nombre de tournois GameOn
@@ -183,4 +185,4 @@ document.getElementById("inscription").addEventListener("submit", function(e) {
 // une autre pour firstNAme
 // 3ieme pour l'email
 // Et à la toute fin :
-// if(validName && validEmail && ) => passer à la div merci pour votre inscription 
+// if(validName && validEmail && ) => passer à la div merci pour votre inscription
