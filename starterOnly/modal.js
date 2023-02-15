@@ -55,11 +55,9 @@ const formDataNom = document.querySelector("#last");
 const formDataEmail = document.querySelector("#email");
 const formDataBirthdate = document.querySelector("#birthdate");
 const formDataTournois = document.querySelector("#quantity");
-// const formDataLocation = document.querySelector();
-// const formDataCheckbox = document.querySelector();
 
 //
-// Vérification conformité Prénom + conformité Nom
+// Vérification conformité Prénom + Nom
 //
 formDataPrenom.addEventListener("change", function() {
   checkName(this);
@@ -130,19 +128,12 @@ function checkBirthdate(input) {
   let today = new Date();
   let year = Number(today.getFullYear());
   let yearOfInput = Number(input.value.substring(0,4));
-
   // Vérification mois de naissance
   // let month = Number(today.getMonth()) + 1;
   // let monthOfInput = Number(input.value.substring(5,7));
   // Vérification jour de naissance
   // let day = Number(today.getDate());
   // let dayOfInput = Number(input.value.substring(8,10));
-  // console.log(year);
-  // console.log(month);
-  // console.log(day);
-  // console.log(yearOfInput);
-  // console.log(monthOfInput);
-  // console.log(dayOfInput);
 
   // Résultat conditionnel
   if (testBirthdate && year > yearOfInput) {
@@ -169,22 +160,19 @@ formDataTournois.addEventListener("change", function() {
 
 function checkTournois(input) {
   // Définition du RegExp
-  let tournoisRegExp = new RegExp('[0-9]{1,3}', 'g');
+  let tournoisRegExp = new RegExp('^[0-9]{1,2}$');
 
   // Test du RegExp
   let testTournois = tournoisRegExp.test(input.value);
-  console.log(testTournois);
 
   //Résultat conditionnel
   if (testTournois) {
-    console.log("OK");
     input.nextElementSibling.innerHTML = "Champ valide.";
     input.nextElementSibling.style.color = "green";
     return true;
   } else {
-    console.log("pas ok...");
-    input.nextElementSibling.innerHTML = "Champ valide.";
-    input.nextElementSibling.style.color = "green";
+    input.nextElementSibling.innerHTML = "Veuillez saisir un nombre compris entre 0 et 99";
+    input.nextElementSibling.style.color = "red";
     return false;
   }
 }
@@ -192,11 +180,35 @@ function checkTournois(input) {
 //
 // Vérification au moins 1 tournoi sélectionné
 //
+const formDataLocation = document.querySelectorAll('input[name="location"]');
+
+let radioCochée = false;
+console.log(radioCochée);
+
+formDataLocation.forEach(function(e) {
+  e.addEventListener("click", function() {
+    console.log("Une case est cochée");
+  });
+
+});
+
+
+
+
+
+
+
 
 
 //
 // Vérification conditions d'utilisateurs = COCHEE (car pas cochée par défaut)
 //
+
+
+
+
+
+
 
 //----------------------------------------------------------------------------------------------
 
