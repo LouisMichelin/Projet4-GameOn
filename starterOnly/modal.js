@@ -126,25 +126,34 @@ function checkBirthdate(input) {
   // Test du RegExp
   let testBirthdate = birthdateRegExp.test(input.value);
 
-  // Variables pour vérifier : (Birthdate <<< Date d'aujourd'hui)
+  // Vérification année de naissance
   let today = new Date();
-  let dd = today.getDate();
-  let mm = today.getMonth() + 1; // months de 0 à 11 en JavaScript -> donc +1
-  let yyyy = today.getFullYear();
-  if (dd < 10) {dd = '0' + dd;}
-  if (mm < 10) {mm = '0' + mm;}
-  let dateAujd = yyyy + '-' + mm + '-' + dd ;
-  
+  let year = Number(today.getFullYear());
+  let yearOfInput = Number(input.value.substring(0,4));
+
+  // Vérification mois de naissance
+  // let month = Number(today.getMonth()) + 1;
+  // let monthOfInput = Number(input.value.substring(5,7));
+  // Vérification jour de naissance
+  // let day = Number(today.getDate());
+  // let dayOfInput = Number(input.value.substring(8,10));
+  // console.log(year);
+  // console.log(month);
+  // console.log(day);
+  // console.log(yearOfInput);
+  // console.log(monthOfInput);
+  // console.log(dayOfInput);
+
   // Résultat conditionnel
-  if (testBirthdate && dateAujd.valueOf() > input.value) {
+  if (testBirthdate && year > yearOfInput) {
     input.nextElementSibling.innerHTML = "Champ valide.";
     input.nextElementSibling.style.color = "green";
     return true;
-  } else if (testBirthdate && dateAujd.valueOf() < input.value) {
+  } else if (testBirthdate || !testBirthdate && yearOfInput >= year) {
     input.nextElementSibling.innerHTML = "Vous ne pouvez pas être né(e) demain!";
     input.nextElementSibling.style.color = "red";
     return false;
-  } else if (testBirthdate === false) {
+  } else if (!testBirthdate) {
     input.nextElementSibling.innerHTML = "Veuillez saisir votre date de naissance.";
     input.nextElementSibling.style.color = "red";
     return false;
@@ -154,12 +163,31 @@ function checkBirthdate(input) {
 //
 // Vérification conformité Nombre de tournois GameOn
 //
+formDataTournois.addEventListener("change", function() {
+  checkTournois(this);
+});
 
-// if else selon valeur saisie
-  let tournamentsRegExp = new RegExp(
-    '[0-9]{1,3}', 'g'
-  );
+function checkTournois(input) {
+  // Définition du RegExp
+  let tournoisRegExp = new RegExp('[0-9]{1,3}', 'g');
 
+  // Test du RegExp
+  let testTournois = tournoisRegExp.test(input.value);
+  console.log(testTournois);
+
+  //Résultat conditionnel
+  if (testTournois) {
+    console.log("OK");
+    input.nextElementSibling.innerHTML = "Champ valide.";
+    input.nextElementSibling.style.color = "green";
+    return true;
+  } else {
+    console.log("pas ok...");
+    input.nextElementSibling.innerHTML = "Champ valide.";
+    input.nextElementSibling.style.color = "green";
+    return false;
+  }
+}
 
 //
 // Vérification au moins 1 tournoi sélectionné
