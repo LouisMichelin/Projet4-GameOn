@@ -56,6 +56,8 @@ const formDataEmail = document.querySelector("#email");
 const formDataBirthdate = document.querySelector("#birthdate");
 const formDataTournois = document.querySelector("#quantity");
 
+
+
 //
 // Vérification conformité Prénom + Nom
 //
@@ -177,37 +179,113 @@ function checkTournois(input) {
   }
 }
 
-//
-// Vérification au moins 1 tournoi sélectionné
-//
 
-// Sélection de tous les éléments "radio" 
-const formDataLocation = document.querySelectorAll('input[name="location"]');
-console.log(formDataLocation);
 
-// Fonction de comparaison
-let locationFalse = formDataLocation.forEach(function() {
-  if (formDataLocation.checked) {
-    console.log("OK");
-  } else {
-    console.log("rien de coché");
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// Vérification d'au moins 1 Location cochée
+//
+const formDataLocations = document.querySelectorAll('input[name="location"]');
+//////////////////////////////////////////////////////////////////////////////
+
+
+
+function checkLocations(e) {
+  e.addEventListener("click", function() {
+    if (formDataLocations) {
+      console.log("Une case est bien cochée.");
+      return true;
+    } else {
+      console.log("Veuillez cocher une case!");
+      return false;
+    }
+  });
+}
+
+
+
+
+formDataLocations.forEach(function(e) {
+  e.addEventListener("click", function() {
+    console.log("Une case est cochée");
+  });
+
 });
 
-console.log(locationFalse);
 
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//const formDataLocation = document.querySelectorAll('input[name="location"]');
+
+//let radioCochée = false;
+//console.log(radioCochée);
+
+//formDataLocation.forEach(function(e) {
+//  e.addEventListener("click", function() {
+//    console.log("Une case est cochée");
+//  });
+//
+//});
+
+////////////////////////////////////////////////////////
+
+//function checkLocation() {
+//  let valid = false;
+//  
+//  for (let i = 0; i < formDataLocations.length; i++) {
+//    if (formDataLocations[i].checked) {
+//      valid = true;
+//      break;
+//    }
+//  }
+//  if (valid) {
+//    console.log("WHOUHOU");
+//    return true;
+//  } else {
+//    console.log("Veuillez saisir un champ.");
+//  }
+//}
+
+//////////////////////////////////////////////////////////////
+
+// 1 Fonction de comparaison
+  //let locationFalse = formDataLocations.forEach(function() {
+  //  if (formDataLocations.checked) {
+  //    console.log("OK");
+  //  } else {
+  //    console.log("rien de coché");
+  //  }
+  //});
+
+//////////////////////////////////////////////////////////////
 
 // BACKUP BOUCLE FOR A TRAVAILLER //
-
-//formDataLocation.forEach(function(location) {
-//  location.addEventListener("click", function() {
-//    for (let i = 0; i < formDataLocation.length; i++) {
-//      if (formDataLocation[i].checked) {
-//        return true;
-//      }
-//    }
-//  });
-//});
+  //formDataLocations.forEach(function(location) {
+  //  location.addEventListener("click", function() {
+  //    for (let i = 0; i < formDataLocations.length; i++) {
+  //      if (formDataLocations[i].checked) {
+  //        return true;
+  //      }
+  //    }
+  //  });
+  //});
 
 
 
