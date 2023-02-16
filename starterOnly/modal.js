@@ -39,24 +39,12 @@ function closeModal() {
 // #2 Implémenter les entrées du formulaire
 //
 
-// Le formulaire doit être valide quand l'utilisateur clique sur "Submit"
-// Les données doivent être saisies correctement :
-//  (1) Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
-//  (2) Le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
-//  (3) L'adresse électronique est valide.
-//  (4) Pour le nombre de concours, une valeur numérique est saisie.
-//  (5) Un bouton radio est sélectionné.
-//  (6) La case des conditions générales est cochée, l'autre case est facultative / peut être laissée décochée.
-// Conserver les données du formulaire (ne pas effacer le formulaire) lorsqu'il ne passe pas la validation.
-
 // DOM Elements pour formulaire
 const formDataPrenom = document.querySelector("#first");
 const formDataNom = document.querySelector("#last");
 const formDataEmail = document.querySelector("#email");
 const formDataBirthdate = document.querySelector("#birthdate");
 const formDataTournois = document.querySelector("#quantity");
-
-
 
 //
 // Vérification conformité Prénom + Nom
@@ -179,145 +167,68 @@ function checkTournois(input) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //
 // Vérification d'au moins 1 Location cochée
 //
 const formDataLocations = document.querySelectorAll('input[name="location"]');
-//////////////////////////////////////////////////////////////////////////////
 
-
-
-function checkLocations(e) {
-  e.addEventListener("click", function() {
-    if (formDataLocations) {
-      console.log("Une case est bien cochée.");
-      return true;
-    } else {
-      console.log("Veuillez cocher une case!");
-      return false;
-    }
-  });
-}
-
-
-
-
+// Déclencheur de la fonction checkLocations
 formDataLocations.forEach(function(e) {
   e.addEventListener("click", function() {
-    console.log("Une case est cochée");
+    checkLocations2();
   });
-
 });
 
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////
-//const formDataLocation = document.querySelectorAll('input[name="location"]');
-
-//let radioCochée = false;
-//console.log(radioCochée);
-
-//formDataLocation.forEach(function(e) {
-//  e.addEventListener("click", function() {
-//    console.log("Une case est cochée");
-//  });
-//
-//});
-
-////////////////////////////////////////////////////////
-
-//function checkLocation() {
-//  let valid = false;
-//  
-//  for (let i = 0; i < formDataLocations.length; i++) {
-//    if (formDataLocations[i].checked) {
-//      valid = true;
-//      break;
-//    }
-//  }
-//  if (valid) {
-//    console.log("WHOUHOU");
-//    return true;
-//  } else {
-//    console.log("Veuillez saisir un champ.");
-//  }
-//}
-
-//////////////////////////////////////////////////////////////
-
-// 1 Fonction de comparaison
-  //let locationFalse = formDataLocations.forEach(function() {
-  //  if (formDataLocations.checked) {
-  //    console.log("OK");
-  //  } else {
-  //    console.log("rien de coché");
-  //  }
-  //});
-
-//////////////////////////////////////////////////////////////
-
-// BACKUP BOUCLE FOR A TRAVAILLER //
-  //formDataLocations.forEach(function(location) {
-  //  location.addEventListener("click", function() {
-  //    for (let i = 0; i < formDataLocations.length; i++) {
-  //      if (formDataLocations[i].checked) {
-  //        return true;
-  //      }
-  //    }
-  //  });
-  //});
-
-
-
-
-
-
-
-
+// checkLocations1
+function checkLocations() {
+  if (formDataLocations) {
+    console.log("Une case est bien cochée.");
+    return true;
+  }
+}
+// checkLocations2
+function checkLocations2() {
+  for (let location of formDataLocations) {
+    if (location.checked) {
+      console.log("c'est bon, c'est coché pour de vrai!!!!!!!!!!!!!!!");
+      return true;
+    }
+  }
+}
 
 //
-// Vérification conditions d'utilisateurs = COCHEE (car pas cochée par défaut)
+// Vérification CGU Conditions d'Utilisateurs = COCHEE (car pas cochée par défaut)
 //
-
-
-
 
 
 
 
 //----------------------------------------------------------------------------------------------
-
 //
 // Bouton SUBMIT - Si toutes les conditions sont réunies
 //
-document.getElementById("inscription").addEventListener("submit", function(e) {
-  // permet d'éviter le rechargement de la page juste après l'envoie du formulaire
+function validate() {
+}
+///////////////////////////////////////////////////////////////////////
+
+const btn = document.querySelector(".btn-submit");
+
+btn.addEventListener("click", function(e) {
   e.preventDefault();
-  alert('Merci de votre inscription, et à bientôt !');
+
+
+
+  if (formDataLocations) {
+    alert("merci pour votre inscription!");
+  } else {
+    alert("veuillez cocher une case svppppp");
+  }
+
 });
 
-// let validName= checkFirstname();
-// une autre pour firstNAme
-// 3ieme pour l'email
-// Et à la toute fin :
+
+//document.getElementById("inscription").addEventListener("submit", function(e) {
+//  e.preventDefault();
+//});
+
 // if(validName && validEmail && ) => passer à la div merci pour votre inscription
