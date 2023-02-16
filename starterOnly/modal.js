@@ -180,17 +180,34 @@ function checkTournois(input) {
 //
 // Vérification au moins 1 tournoi sélectionné
 //
+
+// Sélection de tous les éléments "radio" 
 const formDataLocation = document.querySelectorAll('input[name="location"]');
+console.log(formDataLocation);
 
-let radioCochée = false;
-console.log(radioCochée);
-
-formDataLocation.forEach(function(e) {
-  e.addEventListener("click", function() {
-    console.log("Une case est cochée");
-  });
-
+// Fonction de comparaison
+let locationFalse = formDataLocation.forEach(function() {
+  if (formDataLocation.checked) {
+    console.log("OK");
+  } else {
+    console.log("rien de coché");
+  }
 });
+
+console.log(locationFalse);
+
+
+// BACKUP BOUCLE FOR A TRAVAILLER //
+
+//formDataLocation.forEach(function(location) {
+//  location.addEventListener("click", function() {
+//    for (let i = 0; i < formDataLocation.length; i++) {
+//      if (formDataLocation[i].checked) {
+//        return true;
+//      }
+//    }
+//  });
+//});
 
 
 
