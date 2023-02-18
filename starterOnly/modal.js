@@ -20,7 +20,7 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-//
+//----------------------------------------------------------------------------------------------
 // #1 Fermer la modale
 //
 
@@ -35,7 +35,7 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-//
+//----------------------------------------------------------------------------------------------
 // #2 Implémenter les entrées du formulaire
 //
 
@@ -46,7 +46,7 @@ const formDataEmail = document.querySelector("#email");
 const formDataBirthdate = document.querySelector("#birthdate");
 const formDataTournois = document.querySelector("#quantity");
 
-//
+//----------------------------------------------------------------------------------------------
 // Vérification conformité Prénom + Nom
 //
 formDataPrenom.addEventListener("change", function() {
@@ -74,7 +74,7 @@ function checkName(input) {
   };
 }
 
-//
+//----------------------------------------------------------------------------------------------
 // Vérification conformité Adresse e-mail
 //
 formDataEmail.addEventListener("change", function() {
@@ -98,7 +98,7 @@ function checkEmail(input) {
   };
 }
 
-//
+//----------------------------------------------------------------------------------------------
 // Vérification conformité Date de naissance
 //
 formDataBirthdate.addEventListener("change", function() {
@@ -141,7 +141,7 @@ function checkBirthdate(input) {
   }
 }
 
-//
+//----------------------------------------------------------------------------------------------
 // Vérification conformité Nombre de tournois GameOn
 //
 formDataTournois.addEventListener("change", function() {
@@ -155,7 +155,7 @@ function checkTournois(input) {
   // Test du RegExp
   let testTournois = tournoisRegExp.test(input.value);
 
-  //Résultat conditionnel
+  // Résultat conditionnel
   if (testTournois) {
     input.nextElementSibling.innerHTML = "Champ valide.";
     input.nextElementSibling.style.color = "green";
@@ -167,7 +167,7 @@ function checkTournois(input) {
   }
 }
 
-//
+//----------------------------------------------------------------------------------------------
 // Vérification d'au moins 1 Location cochée
 //
 const formDataLocations = document.querySelectorAll('input[name="location"]');
@@ -175,60 +175,53 @@ const formDataLocations = document.querySelectorAll('input[name="location"]');
 // Déclencheur de la fonction checkLocations
 formDataLocations.forEach(function(e) {
   e.addEventListener("click", function() {
-    checkLocations2();
+    checkLocations();
   });
 });
 
-// checkLocations1
+// Vérification case Tournoi
 function checkLocations() {
-  if (formDataLocations) {
-    console.log("Une case est bien cochée.");
-    return true;
-  }
-}
-// checkLocations2
-function checkLocations2() {
   for (let location of formDataLocations) {
     if (location.checked) {
-      console.log("c'est bon, c'est coché pour de vrai!!!!!!!!!!!!!!!");
       return true;
     }
   }
-}
-
-//
-// Vérification CGU Conditions d'Utilisateurs = COCHEE (car pas cochée par défaut)
-//
-
-
-
+} 
 
 //----------------------------------------------------------------------------------------------
+// Vérification CGU Conditions d'Utilisateurs = COCHEE (car pas cochée par défaut)
 //
+const formDataCheckbox = document.getElementById("checkbox1");
+
+// Vérification des CGU
+formDataCheckbox.addEventListener("click", function() {
+  if (formDataCheckbox.checked) {
+    return true;
+  }
+});
+
+//----------------------------------------------------------------------------------------------
 // Bouton SUBMIT - Si toutes les conditions sont réunies
 //
-function validate() {
-}
-///////////////////////////////////////////////////////////////////////
-
 const btn = document.querySelector(".btn-submit");
 
 btn.addEventListener("click", function(e) {
   e.preventDefault();
-
-
-
-  if (formDataLocations) {
-    alert("merci pour votre inscription!");
-  } else {
-    alert("veuillez cocher une case svppppp");
-  }
-
+  validate();
 });
 
+//console.log(checkName(formDataPrenom));
+//console.log(checkName(formDataNom));
+//console.log(checkEmail(formDataEmail));
+//console.log(checkBirthdate(formDataBirthdate));
+//console.log(checkTournois(formDataTournois));
+//console.log(checkLocations(formDataLocations));
+//console.log(formDataCheckbox.checked);
 
-//document.getElementById("inscription").addEventListener("submit", function(e) {
-//  e.preventDefault();
-//});
-
-// if(validName && validEmail && ) => passer à la div merci pour votre inscription
+function validate() {
+  if (checkName(formDataPrenom) && checkName(formDataNom) && checkEmail(formDataEmail) && checkBirthdate(formDataBirthdate) && checkTournois(formDataTournois) && checkLocations(formDataLocations) && formDataCheckbox.checked) {
+    alert("merci pour votre inscription !");
+  } else {
+    alert("formulaire incomplet");
+  }
+}
