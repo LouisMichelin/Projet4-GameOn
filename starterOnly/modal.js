@@ -172,6 +172,8 @@ function checkTournois(input) {
 //
 const formDataLocations = document.querySelectorAll('input[name="location"]');
 
+const textLabelTournoi = document.querySelector(".text-label");
+
 // Déclencheur de la fonction checkLocations
 formDataLocations.forEach(function(e) {
   e.addEventListener("click", function() {
@@ -186,7 +188,7 @@ function checkLocations() {
       return true;
     }
   }
-} 
+}
 
 //----------------------------------------------------------------------------------------------
 // Vérification CGU Conditions d'Utilisateurs = COCHEE (car pas cochée par défaut)
@@ -220,8 +222,17 @@ btn.addEventListener("click", function(e) {
 
 function validate() {
   if (checkName(formDataPrenom) && checkName(formDataNom) && checkEmail(formDataEmail) && checkBirthdate(formDataBirthdate) && checkTournois(formDataTournois) && checkLocations(formDataLocations) && formDataCheckbox.checked) {
-    alert("merci pour votre inscription !");
+    document.getElementById("inscription").style.display = "none";
+    document.querySelector(".close").style.display = "none";
+    document.getElementById("msg-merci").style.display = "flex";
+    document.getElementById("close-inscription").style.display = "block";
+    document.getElementById("close-inscription-txt").style.display = "flex";
   } else {
     alert("formulaire incomplet");
   }
 }
+const btnFermer = document.getElementById("close-inscription-txt");
+
+btnFermer.addEventListener("click", function() {
+  modalbg.style.display = "none";
+})
