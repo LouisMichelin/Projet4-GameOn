@@ -183,14 +183,6 @@ main {
   padding-top: 10px;
 }
 
-/* Classe pour le message post-vérification du RegExp */
-.regexp-check {
-  padding-top: 0;
-  font-size: 15px;
-  font-weight: normal;
-  font-style: italic;
-}
-
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
@@ -523,6 +515,7 @@ footer {
     margin-top: 50px;
     text-align: center;
   }
+
 }
 
 @keyframes modalopen {
@@ -535,6 +528,30 @@ footer {
   }
 }
 
+/* Classe pour le message post-vérification du RegExp */
+.regexp-check {
+  padding-top: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.erreurLocation {
+  padding-top: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: italic;
+  display: none;
+  color:red ;
+}
+.checkbox-return{
+  padding-top: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: italic;
+  display: none;
+  color:red ;
+}
 #msg-merci {
   display: none;
   align-items: center;
