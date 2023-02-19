@@ -110,7 +110,7 @@ function checkBirthdate(input) {
   let birthdateRegExp = new RegExp(
     '^(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'// type=date est en yyyy-mm-jj !
   );
-
+console.log(input.value);
   // Test du RegExp
   let testBirthdate = birthdateRegExp.test(input.value);
 
@@ -119,11 +119,14 @@ function checkBirthdate(input) {
   let year = Number(today.getFullYear());
   let yearOfInput = Number(input.value.substring(0,4));
   // Vérification mois de naissance
-  // let month = Number(today.getMonth()) + 1;
-  // let monthOfInput = Number(input.value.substring(5,7));
+   let month = Number(today.getMonth()) + 1;
+   let monthOfInput = Number(input.value.substring(5,7));
   // Vérification jour de naissance
-  // let day = Number(today.getDate());
-  // let dayOfInput = Number(input.value.substring(8,10));
+   let day = Number(today.getDate());
+   let dayOfInput = Number(input.value.substring(8,10));
+
+// TOUT METTRE EN JOURS PUIS /8 (pour age = 8 mini)
+
 
   // Résultat conditionnel
   if (testBirthdate && year > yearOfInput) {
@@ -181,14 +184,32 @@ formDataLocations.forEach(function(e) {
   });
 });
 
-// Vérification case Tournoi
+
+
+
+//check if any radio button is checked
 function checkLocations() {
-  for (let location of formDataLocations) {
-    if (location.checked) {
-      return true;
-    }
+  const locationFormErrorMessage = document.querySelector(".erreurLocation");
+  console.log(document.querySelector("input[name='location']:checked"));
+  if (document.querySelector("input[name='location']:checked") === null) {
+    locationFormErrorMessage.textContent = "Veuillez sélectionner une ville.";
+    locationFormErrorMessage.style.display= "block";
+    return false;
+  } else {
+    locationFormErrorMessage.textContent = "";
+    locationFormErrorMessage.style.display= "none";
+    return true;
   }
 }
+
+
+
+
+
+
+
+
+
 
 //----------------------------------------------------------------------------------------------
 // Vérification CGU Conditions d'Utilisateurs = COCHEE (car pas cochée par défaut)
@@ -212,16 +233,18 @@ btn.addEventListener("click", function(e) {
   validate();
 });
 
-//console.log(checkName(formDataPrenom));
-//console.log(checkName(formDataNom));
-//console.log(checkEmail(formDataEmail));
-//console.log(checkBirthdate(formDataBirthdate));
-//console.log(checkTournois(formDataTournois));
-//console.log(checkLocations(formDataLocations));
-//console.log(formDataCheckbox.checked);
 
 function validate() {
-  if (checkName(formDataPrenom) && checkName(formDataNom) && checkEmail(formDataEmail) && checkBirthdate(formDataBirthdate) && checkTournois(formDataTournois) && checkLocations(formDataLocations) && formDataCheckbox.checked) {
+
+  const validName = checkName(formDataPrenom);
+  const validLastName = checkName(formDataNom);
+  const validemail = checkEmail(formDataEmail);
+  const  validBirthday = checkBirthdate(formDataBirthdate);
+  const validTournois = checkTournois(formDataTournois); 
+  const validLocation = checkLocations(formDataLocations); 
+  const validChecker = formDataCheckbox.checked; 
+
+  if (validName && validLastName && validemail && validBirthday && validTournois && validLocation && validChecker) {
     document.getElementById("inscription").style.display = "none";
     document.querySelector(".close").style.display = "none";
     document.getElementById("msg-merci").style.display = "flex";
@@ -231,8 +254,9 @@ function validate() {
     alert("formulaire incomplet");
   }
 }
+
 const btnFermer = document.getElementById("close-inscription-txt");
 
 btnFermer.addEventListener("click", function() {
   modalbg.style.display = "none";
-})
+});
