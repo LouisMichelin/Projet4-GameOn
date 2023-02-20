@@ -544,6 +544,15 @@ footer {
   display: none;
   color:red ;
 }
+
+.erreurCheckbox {
+  padding-top: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: italic;
+  display: none;
+  color:red ;
+}
 .checkbox-return{
   padding-top: 0;
   font-size: 15px;

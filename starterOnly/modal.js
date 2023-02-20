@@ -11,26 +11,32 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const btnFermer = document.getElementById("close-inscription");
 
-// launch modal event
+// Launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+// Launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
+
+// Bouton "Fermer" depuis la page de remerciements
+btnFermer.addEventListener("click", function() {
+  modalbg.style.display = "none";
+});
 
 //----------------------------------------------------------------------------------------------
 // #1 Fermer la modale
 //
 
-// DOM Element pour fermeture de la modale
+// DOM Element
 const closeBtn = document.querySelectorAll(".close");
 
-// Close modal event
+// Close modal event listener
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 
-// Close modal form
+// Close modal function
 function closeModal() {
   modalbg.style.display = "none";
 }
@@ -110,7 +116,7 @@ function checkBirthdate(input) {
   let birthdateRegExp = new RegExp(
     '^(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'// type=date est en yyyy-mm-jj !
   );
-console.log(input.value);
+
   // Test du RegExp
   let testBirthdate = birthdateRegExp.test(input.value);
 
@@ -154,10 +160,8 @@ formDataTournois.addEventListener("change", function() {
 function checkTournois(input) {
   // Définition du RegExp
   let tournoisRegExp = new RegExp('^[0-9]{1,2}$');
-
   // Test du RegExp
   let testTournois = tournoisRegExp.test(input.value);
-
   // Résultat conditionnel
   if (testTournois) {
     input.nextElementSibling.innerHTML = "Champ valide.";
@@ -171,11 +175,9 @@ function checkTournois(input) {
 }
 
 //----------------------------------------------------------------------------------------------
-// Vérification d'au moins 1 Location cochée
+// Vérification Location sélectionnée
 //
 const formDataLocations = document.querySelectorAll('input[name="location"]');
-
-const textLabelTournoi = document.querySelector(".text-label");
 
 // Déclencheur de la fonction checkLocations
 formDataLocations.forEach(function(e) {
@@ -184,13 +186,11 @@ formDataLocations.forEach(function(e) {
   });
 });
 
-
-
-
-//check if any radio button is checked
+// Vérification d'une Location sélectionnée
 function checkLocations() {
   const locationFormErrorMessage = document.querySelector(".erreurLocation");
-  console.log(document.querySelector("input[name='location']:checked"));
+
+  // Condition: si toutes les cases sont "null", alors message d'erreur. Sinon, case vide + Display: none.
   if (document.querySelector("input[name='location']:checked") === null) {
     locationFormErrorMessage.textContent = "Veuillez sélectionner une ville.";
     locationFormErrorMessage.style.display= "block";
@@ -202,51 +202,51 @@ function checkLocations() {
   }
 }
 
-
-
-
-
-
-
-
-
-
 //----------------------------------------------------------------------------------------------
-// Vérification CGU Conditions d'Utilisateurs = COCHEE (car pas cochée par défaut)
+// Vérification CGU sélectionnée
 //
 const formDataCheckbox = document.getElementById("checkbox1");
 
-// Vérification des CGU
 formDataCheckbox.addEventListener("click", function() {
-  if (formDataCheckbox.checked) {
-    return true;
-  }
+  checkCGU();
 });
+
+function checkCGU() {
+  const checkboxErrorMessage = document.querySelector(".erreurCheckbox");
+
+  // Condition checkbox
+  if (formDataCheckbox.checked === false) {
+    checkboxErrorMessage.textContent = "Veuillez prendre connaissance des CGU.";
+    checkboxErrorMessage.style.display = "block";
+  } else {
+    checkboxErrorMessage.textContent = "";
+    checkboxErrorMessage.style.display = "none";
+  }
+}
 
 //----------------------------------------------------------------------------------------------
 // Bouton SUBMIT - Si toutes les conditions sont réunies
 //
 const btn = document.querySelector(".btn-submit");
 
+// Déclencheur final
 btn.addEventListener("click", function(e) {
   e.preventDefault();
   validate();
 });
 
-
 function validate() {
-
+  // Variables pour éviter rôle du return: true. Permet alors de vérifier TOUS les champs.
   const validName = checkName(formDataPrenom);
   const validLastName = checkName(formDataNom);
-  const validemail = checkEmail(formDataEmail);
-  const  validBirthday = checkBirthdate(formDataBirthdate);
-  const validTournois = checkTournois(formDataTournois); 
-  const validLocation = checkLocations(formDataLocations); 
-  const validChecker = formDataCheckbox.checked; 
+  const validEmail = checkEmail(formDataEmail);
+  const validBirthday = checkBirthdate(formDataBirthdate);
+  const validTournois = checkTournois(formDataTournois);
+  const validLocation = checkLocations(formDataLocations);
+  const validChecker = checkCGU(formDataCheckbox);
 
-  if (validName && validLastName && validemail && validBirthday && validTournois && validLocation && validChecker) {
+  if (validName && validLastName && validEmail && validBirthday && validTournois && validLocation && validChecker) {
     document.getElementById("inscription").style.display = "none";
-    document.querySelector(".close").style.display = "none";
     document.getElementById("msg-merci").style.display = "flex";
     document.getElementById("close-inscription").style.display = "block";
     document.getElementById("close-inscription-txt").style.display = "flex";
@@ -255,8 +255,6 @@ function validate() {
   }
 }
 
-const btnFermer = document.getElementById("close-inscription-txt");
-
-btnFermer.addEventListener("click", function() {
-  modalbg.style.display = "none";
-});
+// AFFICHAGE DES RESULTATS DU FORMULAIRE DANS CONSOLE
+//
+// Utile pour afficher résultat Coché: console.log(document.querySelector("input[name='location']:checked"));
