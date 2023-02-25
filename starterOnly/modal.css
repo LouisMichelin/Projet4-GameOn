@@ -570,7 +570,7 @@ footer {
 #close-inscription {
   display: none;
   background: #fe142f;
-  margin: 0 auto;
+  margin: 15px auto;
   border-radius: 7px;
   font-size: 1rem;
   padding: 12px 82px;

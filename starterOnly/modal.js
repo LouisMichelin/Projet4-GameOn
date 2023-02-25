@@ -114,32 +114,22 @@ formDataBirthdate.addEventListener("change", function() {
 function checkBirthdate(input) {
   // Définition du RegExp
   let birthdateRegExp = new RegExp(
-    '^(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'// type=date est en yyyy-mm-jj !
+    '^(19|20)[0-9]{2}[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$'
   );
 
   // Test du RegExp
   let testBirthdate = birthdateRegExp.test(input.value);
 
-  // Vérification année de naissance
-  let today = new Date();
-  let year = Number(today.getFullYear());
-  let yearOfInput = Number(input.value.substring(0,4));
-  // Vérification mois de naissance
-   let month = Number(today.getMonth()) + 1;
-   let monthOfInput = Number(input.value.substring(5,7));
-  // Vérification jour de naissance
-   let day = Number(today.getDate());
-   let dayOfInput = Number(input.value.substring(8,10));
-
-// TOUT METTRE EN JOURS PUIS /8 (pour age = 8 mini)
-
+  // Comparaison date naissance VS date aujourd'hui 
+  let date1 = new Date(input.value).getTime(); // Naissance
+  let date2 = new Date().getTime(); // Aujourd'hui
 
   // Résultat conditionnel
-  if (testBirthdate && year > yearOfInput) {
+  if (testBirthdate && (date1 < date2)) {
     input.nextElementSibling.innerHTML = "Champ valide.";
     input.nextElementSibling.style.color = "green";
     return true;
-  } else if (testBirthdate || !testBirthdate && yearOfInput >= year) {
+  } else if (date1 > date2) {
     input.nextElementSibling.innerHTML = "Vous ne pouvez pas être né(e) demain!";
     input.nextElementSibling.style.color = "red";
     return false;
@@ -218,9 +208,11 @@ function checkCGU() {
   if (formDataCheckbox.checked === false) {
     checkboxErrorMessage.textContent = "Veuillez prendre connaissance des CGU.";
     checkboxErrorMessage.style.display = "block";
+    return false;
   } else {
     checkboxErrorMessage.textContent = "";
     checkboxErrorMessage.style.display = "none";
+    return true;
   }
 }
 
@@ -250,11 +242,13 @@ function validate() {
     document.getElementById("msg-merci").style.display = "flex";
     document.getElementById("close-inscription").style.display = "block";
     document.getElementById("close-inscription-txt").style.display = "flex";
+    console.log(`Voici les données saisies:
+    ${formDataPrenom.value},
+    ${formDataNom.value},
+    ${formDataEmail.value},
+    ${formDataTournois.value} tournois,
+    et ${document.querySelector("input[name='location']:checked").value}`);
   } else {
     alert("formulaire incomplet");
   }
 }
-
-// AFFICHAGE DES RESULTATS DU FORMULAIRE DANS CONSOLE
-//
-// Utile pour afficher résultat Coché: console.log(document.querySelector("input[name='location']:checked"));
