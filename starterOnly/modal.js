@@ -7,6 +7,7 @@ function editNav() {
   }
 }
 
+
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -219,15 +220,23 @@ function checkCGU() {
 //----------------------------------------------------------------------------------------------
 // Bouton SUBMIT - Si toutes les conditions sont réunies
 //
+/*
 const btn = document.querySelector(".btn-submit");
 
 // Déclencheur final
 btn.addEventListener("click", function(e) {
   e.preventDefault();
-  validate();
+  sendForm();
 });
+*/
 
-function validate() {
+const form = document.getElementById("inscription");
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  sendForm();
+} );
+
+function sendForm() {
   // Variables pour éviter rôle du return: true. Permet alors de vérifier TOUS les champs.
   const validName = checkName(formDataPrenom);
   const validLastName = checkName(formDataNom);

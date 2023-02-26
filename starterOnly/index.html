@@ -18,14 +18,14 @@
       <img alt="logo" src="Logo.png" width="auto" height="auto" />
     </div>
     <div class="main-navbar">
-      
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
-      <a href="#"><span>À propos</span></a>
-      <a href="#"><span>Contact</span></a>
-      <a href="#"><span>Évènements passés</span></a>
+        <a href="#" class="menu active"><span>Accueil</span></a>
+        <a href="#" class="menu"><span>Détails de l'évènement</span></a>
+        <a href="#" class="menu"><span>À propos</span></a>
+        <a href="#" class="menu"><span>Contact</span></a>
+        <a href="#" class="menu"><span>Évènements passés</span></a>
+
       <a href="javascript:void(0);" class="icon" onclick="editNav()">
-        <i class="fa fa-bars"></i>
+        <i class="fa fa-bars" id="menu" ></i>
       </a>
     </div>
     </div>
@@ -62,7 +62,7 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="/* return sendForm(); */" 
             >
               <div
                 class="formData">

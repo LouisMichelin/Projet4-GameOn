@@ -40,7 +40,8 @@ img {
 .main-navbar {
     float: right;
 }
-.topnav a {
+
+.menu {
   float: left;
   display: block;
   color: #000000;
@@ -52,20 +53,42 @@ img {
   font-family: Roboto, sans-serif;
 }
 
-.topnav a:hover {
+
+.menu:hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
+  text-decoration: underline ;
 }
-
+/*
 .topnav a.active {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
-}
+}*/
+
+.active{
+  display: none; }
 
 .topnav .icon {
   display: none;
+  float: left;
+  color: #000000;
+  text-align: center;
+  padding: 12px 12px;
+  margin: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: Roboto, sans-serif;
+}
+.topnav .icon:hover {
+  background-color: #ff0000;
+  color: #ffffff;
+  border-radius: 15px;
+}
+#menu{
+  display: none;
+  color: red;
 }
 
 @media screen and (max-width: 768px) {
@@ -74,9 +97,15 @@ img {
     float: right;
     display: block;
   }
-}
+  #menu{
+    display: block;
+   
+  }
+  #menu:hover {
+    color: #ffffff;
+  }
 
-@media screen and (max-width: 768px) {
+  
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -88,18 +117,20 @@ img {
     display: block;
     text-align: left;
   }
+  .topnav.responsive .active {
+    display: none;
+    
+  }
 }
-
-
-
- @media screen and (max-width: 540px) {
+/*
+@media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    margin-top: -15px; à eliminer pour corriger le responsive 
   }
-} 
+} */
 
 main {
   font-size: 130%;
