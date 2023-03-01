@@ -197,7 +197,8 @@ main {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(26, 39, 156, 0.4);
+  background-color: #fff;
+  /*background-color: rgba(26, 39, 156, 0.4);*/
 }
 
 .content {
@@ -474,7 +475,7 @@ input[data-error]::after {
 .hero-text {
   width: 146%;
   font-weight: normal;
-  margin-top: 57px;
+  margin-top: 75px;
   padding: 0;
 }
 .btn-signup {
@@ -483,7 +484,7 @@ input[data-error]::after {
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
-  margin-top: 59px;
+  margin-top: 75px;
 }
 .hero-img {
   grid-column: span 8;
@@ -508,8 +509,10 @@ footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
+  display: flex;
+  justify-content: center;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1019px) {  /*old 800px*/
   .hero-section {
     display: block;
     box-shadow: unset;
