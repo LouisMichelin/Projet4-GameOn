@@ -38,6 +38,7 @@ img {
     float: left;
 }
 .main-navbar {
+    margin-right: 50px;
     float: right;
 }
 
@@ -96,6 +97,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
+    position: absolute;
   }
   #menu{
     display: block;
